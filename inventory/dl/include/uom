@@ -1,0 +1,37 @@
+ //uom    unit of measurement
+#ifndef __$_uom_$_$__
+#define __$_uom_$_$__
+#include<iuom>
+
+
+namespace inventory
+{
+namespace data_layer
+{
+
+class UnitOfMeasurement:public abc::IUnitOfMeasurement
+{
+private:
+int code;
+string title;
+public:
+UnitOfMeasurement();
+UnitOfMeasurement(int,string);
+UnitOfMeasurement(const UnitOfMeasurement&);
+virtual ~UnitOfMeasurement();
+
+void setCode(int);
+int getCode() const;
+void setTitle(string );
+string getTitle() const;
+IUnitOfMeasurement & operator=(const IUnitOfMeasurement &);
+int operator==(const IUnitOfMeasurement &);
+int operator!=(const IUnitOfMeasurement &);
+int operator>(const IUnitOfMeasurement &);
+int operator>=(const IUnitOfMeasurement &);
+int operator<(const IUnitOfMeasurement &);
+int operator<=(const IUnitOfMeasurement &);
+};
+}
+}
+#endif

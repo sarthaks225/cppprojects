@@ -1,0 +1,30 @@
+ //iuom    interface unit of measurement
+#ifndef __$_iuom_$_$__
+#define __$_iuom_$_$__
+#include<iostream>
+using namespace std;
+namespace inventory
+{
+namespace data_layer
+{
+namespace abc  //abc abstract base class
+{
+class IUnitOfMeasurement
+{
+public:
+virtual void setCode(int)=0;
+virtual int getCode() const=0;
+virtual void setTitle(string )=0;
+virtual string getTitle() const=0;
+virtual IUnitOfMeasurement & operator=(const IUnitOfMeasurement &)=0;
+virtual int operator==(const IUnitOfMeasurement &)=0;
+virtual int operator!=(const IUnitOfMeasurement &)=0;
+virtual int operator>(const IUnitOfMeasurement &)=0;
+virtual int operator>=(const IUnitOfMeasurement &)=0;
+virtual int operator<(const IUnitOfMeasurement &)=0;
+virtual int operator<=(const IUnitOfMeasurement &)=0;
+};
+}
+}
+}
+#endif

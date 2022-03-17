@@ -1,0 +1,31 @@
+#ifndef __$$_iuomdao_$_
+#define __$$_iuomdao_$_
+#include<stdio.h>
+#include<iuom>
+#include<daoexception>
+#include<forward_list>
+
+using namespace std;
+namespace inventory
+{
+namespace data_layer
+{
+namespace abc
+{
+class IUnitOfMeasurementDAO
+{
+public:
+virtual void add(IUnitOfMeasurement *unitOfMeasurement) throw(DAOException)=0;
+virtual void update(IUnitOfMeasurement *unitOfMeasurement) throw(DAOException)=0;
+virtual void remove(IUnitOfMeasurement *unitOfMeasurement) throw(DAOException)=0;
+virtual IUnitOfMeasurement * getByCode(int code) throw(DAOException)=0;
+virtual IUnitOfMeasurement * getByTitle(string title) throw(DAOException)=0;
+virtual forward_list<IUnitOfMeasurement *> * getAll() throw(DAOException)=0;
+virtual int getCount() throw(DAOException)=0;
+virtual int codeExist(int code) throw(DAOException)=0;
+virtual int titleExist(string title) throw(DAOException)=0;
+};
+}
+}
+}
+#endif
