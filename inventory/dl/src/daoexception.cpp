@@ -27,10 +27,3 @@ const char * DAOException::what() const throw()
 {
 return this->message.c_str();
 }
-
-
-int main()
-{
-DAOException d("sarthak");
-return 0;
-}

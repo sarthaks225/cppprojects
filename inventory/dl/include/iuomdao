@@ -15,6 +15,7 @@ namespace abc
 class IUnitOfMeasurementDAO
 {
 public:
+static string FILE_NAME;
 virtual void add(IUnitOfMeasurement *unitOfMeasurement) throw(DAOException)=0;
 virtual void update(IUnitOfMeasurement *unitOfMeasurement) throw(DAOException)=0;
 virtual void remove(IUnitOfMeasurement *unitOfMeasurement) throw(DAOException)=0;

@@ -1,0 +1,7 @@
+#ifndef __$_stringutils__$_
+#define __$_stringutils__$_
+#include<iostream>
+using namespace std;
+int compareStringIgnoreCase(const char *,const char*);
+string stringTrimme(string );
+#endif

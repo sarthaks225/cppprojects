@@ -8,6 +8,19 @@ namespace inventory
         
         class UnitOfMeasurementDAO:public abc::IUnitOfMeasurementDAO
         {
+          class Head 
+          {
+            public:
+            int lastGeneratedCode;
+            int numberOfRecords;
+          };
+          class _UnitOfMeasurement
+          {
+            public:
+            int code;
+            char title[51];
+          };
+
           public:
           void add(abc::IUnitOfMeasurement *unitOfMeasurement) throw(DAOException);
           void update(abc::IUnitOfMeasurement *unitOfMeasurement) throw(DAOException);

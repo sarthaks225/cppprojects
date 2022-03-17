@@ -70,11 +70,3 @@ int UnitOfMeasurement::operator<=(const IUnitOfMeasurement &other)
 {
 return this->code<=other.getCode();
 }
-
-
-int main()
-{
-abc::IUnitOfMeasurement *u;
-u=new UnitOfMeasurement;
-return 0;
-}
