@@ -21,7 +21,9 @@ cout<<"3. get by code"<<endl;
 cout<<"4. get by title"<<endl;
 cout<<"5. code exists"<<endl;
 cout<<"6. title existd"<<endl;
-cout<<"7. exit"<<endl;
+cout<<"7. update"<<endl;
+cout<<"8. remove"<<endl;
+cout<<"9. exit"<<endl;
 cout<<"enter your choice: ";
 cin>>ch;
 if(ch==1)
@@ -127,7 +129,50 @@ cout<<daoExc.what()<<endl;
 
 }
 
-if(ch==7) break;
+
+if(ch==7)
+{
+cout<<"enter code : ";
+cin>>i;
+m.setCode(i);
+cout<<"enter title : ";
+cin>>title;
+m.setTitle(title);
+try
+{
+uomdao.update(&m);
+cout<<"updation done"<<endl;
+}catch (DAOException daoExc)
+{
+cout<<daoExc.what()<<endl;
+}
+
+
+
+}
+
+
+if(ch==8)
+{
+cout<<"enter code: ";
+cin>>i;
+cout<<"enter title: ";
+cin>>title;
+m.setTitle(title);
+m.setCode(i);
+try
+{
+uomdao.remove(&m);
+cout<<"removed"<<endl;
+}catch (DAOException exc)
+{
+cout<<exc.what()<<endl;
+}
+
+
+}
+
+if(ch==9) break;
 
 
 
