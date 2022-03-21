@@ -1,11 +1,11 @@
  //iuom    interface unit of measurement
-#ifndef __$_iuom_$_$__dl
-#define __$_iuom_$_$__dl
+#ifndef __$_iuom__$_$__bl
+#define __$_iuom_dl_$_$__bl
 #include<iostream>
 using namespace std;
 namespace inventory
 {
-namespace data_layer
+namespace business_layer
 {
 namespace abc  //abc abstract base class
 {

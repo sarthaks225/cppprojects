@@ -1,5 +1,5 @@
-#ifndef __$$_iuomdao_$_
-#define __$$_iuomdao_$_
+#ifndef __$$_iuomdao_$_dl
+#define __$$_iuomdao_$_dl
 #include<stdio.h>
 #include<iuom>
 #include<daoexception>

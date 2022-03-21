@@ -1,5 +1,5 @@
-#ifndef __$__uomdao__$__
-#define __$__uomdao__$__
+#ifndef __$__uomdao__$__dl
+#define __$__uomdao__$__dl
 #include<iuomdao>
 namespace inventory
 {

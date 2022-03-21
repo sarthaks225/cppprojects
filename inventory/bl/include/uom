@@ -1,12 +1,12 @@
  //uom    unit of measurement
-#ifndef __$_uom_$_$__dl
-#define __$_uom_$_$__dl
+#ifndef __$_uom__$_$__bl
+#define __$_uom_dl_$_$__bl
 #include<iuom>
 
 
 namespace inventory
 {
-namespace data_layer
+namespace business_layer
 {
 
 class UnitOfMeasurement:public abc::IUnitOfMeasurement
