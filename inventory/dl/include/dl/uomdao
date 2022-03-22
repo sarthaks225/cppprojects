@@ -1,6 +1,6 @@
 #ifndef __$__uomdao__$__dl
 #define __$__uomdao__$__dl
-#include<iuomdao>
+#include<dl/iuomdao>
 namespace inventory
 {
     namespace data_layer

@@ -1,7 +1,7 @@
  //uom    unit of measurement
 #ifndef __$_uom_$_$__dl
 #define __$_uom_$_$__dl
-#include<iuom>
+#include<dl/iuom>
 
 
 namespace inventory

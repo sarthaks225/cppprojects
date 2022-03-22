@@ -1,7 +1,7 @@
 #include<iostream>
-#include<uomdao>
-#include<daoexception>
-#include<uom>
+#include<dl/uomdao>
+#include<dl/daoexception>
+#include<dl/uom>
 #include<forward_list>
 using namespace inventory;
 using namespace data_layer;

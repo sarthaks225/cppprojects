@@ -1,6 +1,6 @@
 #include <stdio.h>
-#include <uomdao>
-#include <uom>
+#include <dl/uomdao>
+#include <dl/uom>
 #include <fstream>
 #include <string.h>
 #include <stringutils>
