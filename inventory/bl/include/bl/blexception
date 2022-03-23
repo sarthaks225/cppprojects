@@ -1,5 +1,7 @@
-#ifndef ___blexception__$$__
-#define ___blexception__$$__
+#ifndef __$_blexception__$_bl
+#define __$_blexception__$_bl
+
+
 #include<iostream>
 #include<utility>
 #include<map>

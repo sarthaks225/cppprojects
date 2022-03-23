@@ -13,8 +13,8 @@ d=*b;
 if(c>='A' && c<='Z') c=c+32;
 if(d>='A' && d<='Z') d=d+32;
 if(c!=d) return c-d;
-a++;
-b++;
+++a;
+++b;
 }
 if(*a==*b) return 0;
 c=*a;

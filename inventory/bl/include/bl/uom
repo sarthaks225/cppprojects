@@ -1,6 +1,6 @@
  //uom    unit of measurement
 #ifndef __$_uom__$_$__bl
-#define __$_uom_dl_$_$__bl
+#define __$_uom__$_$__bl 
 #include<bl/iuom>
 
 

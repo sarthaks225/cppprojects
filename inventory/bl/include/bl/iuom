@@ -1,6 +1,5 @@
- //iuom    interface unit of measurement
-#ifndef __$_iuom__$_$__bl
-#define __$_iuom_dl_$_$__bl
+#ifndef __$_iuom__$_bl
+#define __$_iuom__$_bl
 #include<iostream>
 using namespace std;
 namespace inventory
