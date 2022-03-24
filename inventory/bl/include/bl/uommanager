@@ -45,7 +45,7 @@ private:
  abc::IUnitOfMeasurement * getUnitOfMeasurementByTitle(string &title) throw(BLException);
  
  forward_list<abc::IUnitOfMeasurement *> *getAllUnitOfMeasurement() throw(BLException);
- int unitOfMeasuremetnCodeExists(int code) throw(BLException);
+ int unitOfMeasurementCodeExists(int code) throw(BLException);
  int unitOfMeasurementTitleExists(string &title) throw(BLException);
  int getUnitOfMeasurementCount() throw(BLException);
 };

@@ -26,7 +26,7 @@ virtual abc::IUnitOfMeasurement * getUnitOfMeasurementByCode(int code) throw(BLE
 virtual abc::IUnitOfMeasurement * getUnitOfMeasurementByTitle(string &title) throw(BLException)=0;
 
 virtual forward_list<abc::IUnitOfMeasurement *> *getAllUnitOfMeasurement() throw(BLException)=0;
-virtual int unitOfMeasuremetnCodeExists(int code) throw(BLException)=0;
+virtual int unitOfMeasurementCodeExists(int code) throw(BLException)=0;
 virtual int unitOfMeasurementTitleExists(string &title) throw(BLException)=0;
 virtual int getUnitOfMeasurementCount() throw(BLException)=0;
 };

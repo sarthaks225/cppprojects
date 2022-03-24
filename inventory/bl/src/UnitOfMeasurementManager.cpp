@@ -204,17 +204,219 @@ UnitOfMeasurementManager::UnitOfMeasurementManager()
 
 
  }
- void UnitOfMeasurementManager::removeUnitOfMeasurement(abc::IUnitOfMeasurement *) throw(BLException)
- {}
+ void UnitOfMeasurementManager::removeUnitOfMeasurement(abc::IUnitOfMeasurement *unitOfMeasurement) throw(BLException)
+ {
+
+    if(unitOfMeasurement==NULL)
+    {
+        throw BLException("nothing to update");
+    }
+    int code=unitOfMeasurement->getCode();
+    string title=unitOfMeasurement->getTitle();
+    string vTitle=stringTrimme(title);
+    BLException blexc;
+    if(code<=0)
+    {
+        blexc.addPropertyException("code","code must be greater then zero");
+    }
+    if(vTitle.length()==0)
+    {
+        blexc.addPropertyException("title","Title is empty");
+    }
+    if(vTitle.length()>50)
+    {
+        blexc.addPropertyException("title","Title length should not exceed 50");
+    }
+    if(blexc.hasExceptions())
+    {
+
+        throw blexc;
+    }
+
+    char exc[150];
+    sprintf(exc,"Code : %d with title : (%s) not exists",code,title.c_str());
+    map<string *,_UnitOfMeasurement *,UnitOfMeasurementTitleComparetor>::iterator i;
+    i=dataModel.titleWiseMap.find(&vTitle);
+    if(i==dataModel.titleWiseMap.end())
+    {
+        throw BLException(exc);
+    }
+
+    map<int,_UnitOfMeasurement *>::iterator j;
+    j=dataModel.codeWiseMap.find(code);
+    if(j==dataModel.codeWiseMap.end() || code!=(*i).second->code)
+    {
+        throw BLException(exc);
+    }
+
+    inventory::data_layer::UnitOfMeasurementDAO dluomdao;
+    inventory::data_layer::UnitOfMeasurement dluom;
+    dluom.setCode(code);
+    dluom.setTitle(vTitle);
+
+    try
+    {
+        dluomdao.remove(&dluom);
+        j=dataModel.codeWiseMap.find(code);
+        dataModel.codeWiseMap.erase(j->first);
+        i=dataModel.titleWiseMap.find(&vTitle);
+        dataModel.titleWiseMap.erase(i->first);
+        
+    }
+    catch (inventory::data_layer:: DAOException dlexc)
+    {
+        blexc.setGenericException(dlexc.what());
+        throw blexc;
+    }
+
+
+
+ }
  void UnitOfMeasurementManager::removeUnitOfMeasurementByTitle(string &title) throw(BLException)
- {}
+ {
+
+    if(title.length()==0)
+    {
+        throw BLException("nothing to update");
+    }
+    string vTitle=stringTrimme(title);
+    BLException blexc;
+    if(vTitle.length()==0)
+    {
+        blexc.addPropertyException("title","Title is empty");
+    }
+    if(vTitle.length()>50)
+    {
+        blexc.addPropertyException("title","Title length should not exceed 50");
+    }
+    if(blexc.hasExceptions())
+    {
+      throw blexc;
+    }
+
+    char exc[150];
+    sprintf(exc,"title : (%s) not exists",title);
+    map<string *,_UnitOfMeasurement *,UnitOfMeasurementTitleComparetor>::iterator i;
+    i=dataModel.titleWiseMap.find(&vTitle);
+    if(i==dataModel.titleWiseMap.end())
+    {
+        throw BLException(exc);
+    }
+
+    map<int,_UnitOfMeasurement *>::iterator j;
+    int code;
+    inventory::data_layer::UnitOfMeasurementDAO dluomdao;
+    inventory::data_layer::UnitOfMeasurement dluom;
+    i=dataModel.titleWiseMap.find(&vTitle);
+    code=(*i).second->code;
+    j=dataModel.codeWiseMap.find(code);
+    dluom.setTitle(vTitle);
+    dluom.setCode(code);
+    
+    try
+    {
+        dluomdao.remove(&dluom);
+        dataModel.codeWiseMap.erase(j->first);
+        dataModel.titleWiseMap.erase(&vTitle);     
+    }
+    catch (inventory::data_layer:: DAOException dlexc)
+    {
+        blexc.setGenericException(dlexc.what());
+        throw blexc;
+    }
+
+
+ }
  void UnitOfMeasurementManager::removeUnitOFMeasurementByCode(int code) throw(BLException)
- {}
+ {
+
+     if(code<=0)
+    {
+        throw BLException("invlid code, code must be greater ther 0");
+    }
+    BLException blexc;
+    
+    map<int,_UnitOfMeasurement *>::iterator j;
+    j=dataModel.codeWiseMap.find(code);
+    if(j==dataModel.codeWiseMap.end())
+    {
+        throw BLException("code not exists");
+    }
+
+    string title;
+    title=*((*j).second->title);
+    map<string *,_UnitOfMeasurement *,UnitOfMeasurementTitleComparetor>::iterator i;
+    i=dataModel.titleWiseMap.find(&title);
+    inventory::data_layer::UnitOfMeasurementDAO dluomdao;
+    inventory::data_layer::UnitOfMeasurement dluom;
+    dluom.setTitle(title);
+    dluom.setCode(code);
+    
+    try
+    {
+        dluomdao.remove(&dluom);
+        dataModel.codeWiseMap.erase(code);
+        dataModel.titleWiseMap.erase(&title);     
+    }
+    catch (inventory::data_layer:: DAOException dlexc)
+    {
+        blexc.setGenericException(dlexc.what());
+        throw blexc;
+    }
+
+
+ }
  
 abc::IUnitOfMeasurement * UnitOfMeasurementManager::getUnitOfMeasurementByCode(int code) throw(BLException)
-{}
+{
+
+    if(code<=0)
+    {
+        throw BLException("invlid code, code must be greater ther 0");
+    }
+    BLException blexc;
+    map<int,_UnitOfMeasurement *>::iterator j;
+    j=dataModel.codeWiseMap.find(code);
+    if(j==dataModel.codeWiseMap.end())
+    {
+        throw BLException(string(to_string(code))+string("code not exists"));
+    }
+
+    string title;
+    title=*((*j).second->title);
+    inventory::data_layer::UnitOfMeasurement *dluom;
+    dluom=new inventory::data_layer::UnitOfMeasurement;
+    dluom->setTitle(title);
+    dluom->setCode(code);
+    
+    return (abc::IUnitOfMeasurement *) dluom;
+
+}
 abc::IUnitOfMeasurement * UnitOfMeasurementManager::getUnitOfMeasurementByTitle(string &title) throw(BLException)
-{}
+{
+    title=stringTrimme(title);
+    if(title.length()==0)
+    {
+        throw BLException("invlid title, title lenth must be greater then 0");
+    }
+    BLException blexc;
+    map<string *,_UnitOfMeasurement *>::iterator j;
+    j=dataModel.titleWiseMap.find(&title);
+    if(j==dataModel.titleWiseMap.end())
+    {
+        throw BLException("given title in not exists");
+    }
+    int code;
+    code=(*j).second->code;
+    title=*(j->second->title);
+    inventory::data_layer::UnitOfMeasurement *dluom;
+    dluom=new inventory::data_layer::UnitOfMeasurement;
+    dluom->setTitle(title);
+    dluom->setCode(code);
+    
+    return (abc::IUnitOfMeasurement *) dluom;
+
+}
 
  forward_list<abc::IUnitOfMeasurement *> * UnitOfMeasurementManager::getAllUnitOfMeasurement() throw(BLException)
  {
@@ -244,11 +446,44 @@ abc::IUnitOfMeasurement * UnitOfMeasurementManager::getUnitOfMeasurementByTitle(
 
     return list;
  }
- int UnitOfMeasurementManager::unitOfMeasuremetnCodeExists(int code) throw(BLException)
- {}
+ int UnitOfMeasurementManager::unitOfMeasurementCodeExists(int code) throw(BLException)
+ {
+
+    if(code<=0)
+    {
+        return 0;
+    }
+    BLException blexc;
+    map<int,_UnitOfMeasurement *>::iterator j;
+    j=dataModel.codeWiseMap.find(code);
+    if(j==dataModel.codeWiseMap.end())
+    {
+       return 0;
+    }
+    return 1;
+
+ }
  int UnitOfMeasurementManager::unitOfMeasurementTitleExists(string &title) throw(BLException)
- {}
+ {
+    title=stringTrimme(title);
+    if(title.length()==0)
+    {
+        return 0;
+    }
+    BLException blexc;
+    map<string *,_UnitOfMeasurement *>::iterator j;
+    j=dataModel.titleWiseMap.find(&title);
+    if(j==dataModel.titleWiseMap.end())
+    {
+        return 0;
+    }
+    return 1;
+
+ }
  int UnitOfMeasurementManager::getUnitOfMeasurementCount() throw(BLException)
- {}
+ {
+     return dataModel.codeWiseMap.size();
+
+ }
 
 
