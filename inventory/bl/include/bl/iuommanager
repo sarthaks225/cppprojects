@@ -5,6 +5,7 @@
 #include<bl/uom>
 #include<bl/blexception>
 #include<iostream>
+#include<stringutils>
 using namespace std;
 namespace inventory
 {
@@ -15,16 +16,18 @@ namespace abc
 class IUnitOfMeasurementManager
 {
 public:
-virtual void addUnitOfMeasurement(IUnitOfMeasurement *unitOfMeasurement) throw(BLException)=0;
-virtual void updateUnitOfMeasurement(IUnitOfMeasurement *unitOfMeasurement) throw(BLException)=0;
-virtual void removeUnitOfMeasurement(IUnitOfMeasurement *) throw(BLException)=0;
+virtual void addUnitOfMeasurement(abc::IUnitOfMeasurement *unitOfMeasurement) throw(BLException)=0;
+virtual void updateUnitOfMeasurement(abc::IUnitOfMeasurement *unitOfMeasurement) throw(BLException)=0;
+virtual void removeUnitOfMeasurement(abc::IUnitOfMeasurement *) throw(BLException)=0;
 virtual void removeUnitOfMeasurementByTitle(string &title) throw(BLException)=0;
-virtual void removeUnitOFMeasurementByCode(int &code) throw(BLException)=0;
-virtual IUnitOfMeasurement * getUnitOfMeasurementByCode(int &code) throw(BLException)=0;
-virtual IUnitOfMeasurement * getUnitOfMeasurementByTitle(string *title) throw(BLException)=0;
+virtual void removeUnitOFMeasurementByCode(int code) throw(BLException)=0;
+
+virtual abc::IUnitOfMeasurement * getUnitOfMeasurementByCode(int code) throw(BLException)=0;
+virtual abc::IUnitOfMeasurement * getUnitOfMeasurementByTitle(string &title) throw(BLException)=0;
+
 virtual forward_list<abc::IUnitOfMeasurement *> *getAllUnitOfMeasurement() throw(BLException)=0;
-virtual int unitOfMeasuremetnCodeExists(int &code) throw(BLException)=0;
-virtual int unitOfMeasurementTitleExists(string title) throw(BLException)=0;
+virtual int unitOfMeasuremetnCodeExists(int code) throw(BLException)=0;
+virtual int unitOfMeasurementTitleExists(string &title) throw(BLException)=0;
 virtual int getUnitOfMeasurementCount() throw(BLException)=0;
 };
 }

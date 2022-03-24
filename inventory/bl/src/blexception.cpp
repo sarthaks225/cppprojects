@@ -13,6 +13,7 @@ this->genericException=genericException;
 BLException::BLException(const BLException &other)
 {
 this->genericException=other.genericException;
+this->exceptions=other.exceptions;
 }
 BLException::~BLException() throw()
 {
@@ -21,6 +22,7 @@ BLException::~BLException() throw()
 BLException & BLException::operator=(const BLException &other)
 {
 this->genericException=other.genericException;
+this->exceptions=other.exceptions;
 return *this;
 }
 const char * BLException::what() const throw()

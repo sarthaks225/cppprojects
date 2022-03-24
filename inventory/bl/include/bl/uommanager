@@ -2,6 +2,9 @@
 #define __$_uommanager_$_bl
 #include<bl/iuommanager>
 #include<bl/iuom>
+#include<stringutils>
+#include<iostream>
+using namespace std;
 namespace inventory
 {
 namespace business_layer
@@ -11,31 +14,39 @@ class UnitOfMeasurementTitleComparetor
  public:
  int operator()(string *left,string *right);
 };
-class UnitOfMeasurementManager:public abc::IUnitOfMeasurement
+class UnitOfMeasurementManager:public abc::IUnitOfMeasurementManager 
 {
+   class _UnitOfMeasurement
+   {
+      public:
+      int code;
+      string *title;
+   };
 private:
  class DataModel
  {
     public:
-    map<int,abc::IUnitOfMeasurement *> codeWiseMap;
-    map<string *,IUnitOfMeasurement *> titleWiseMap;
+    map<int,_UnitOfMeasurement *> codeWiseMap;
+    map<string *,_UnitOfMeasurement *,UnitOfMeasurementTitleComparetor> titleWiseMap;
     DataModel();
     ~DataModel();
     void populateDataStructure();
  };
-
+ public:
  static DataModel dataModel;
  UnitOfMeasurementManager();
- void addUnitOfMeasurement(IUnitOfMeasurement *unitOfMeasurement) throw(BLException);
- void updateUnitOfMeasurement(IUnitOfMeasurement *unitOfMeasurement) throw(BLException);
- void removeUnitOfMeasurement(IUnitOfMeasurement *) throw(BLException);
+ void addUnitOfMeasurement(abc::IUnitOfMeasurement *unitOfMeasurement) throw(BLException);
+ void updateUnitOfMeasurement(abc::IUnitOfMeasurement *unitOfMeasurement) throw(BLException);
+ void removeUnitOfMeasurement(abc::IUnitOfMeasurement *) throw(BLException);
  void removeUnitOfMeasurementByTitle(string &title) throw(BLException);
- void removeUnitOFMeasurementByCode(int &code) throw(BLException);
- abc::IUnitOfMeasurement * getUnitOfMeasurementByCode(int &code) throw(BLException);
- abc::IUnitOfMeasurement * getUnitOfMeasurementByTitle(string *title) throw(BLException);
+ void removeUnitOFMeasurementByCode(int code) throw(BLException);
+ 
+ abc::IUnitOfMeasurement * getUnitOfMeasurementByCode(int code) throw(BLException);
+ abc::IUnitOfMeasurement * getUnitOfMeasurementByTitle(string &title) throw(BLException);
+ 
  forward_list<abc::IUnitOfMeasurement *> *getAllUnitOfMeasurement() throw(BLException);
- int unitOfMeasuremetnCodeExists(int &code) throw(BLException);
- int unitOfMeasurementTitleExists(string title) throw(BLException);
+ int unitOfMeasuremetnCodeExists(int code) throw(BLException);
+ int unitOfMeasurementTitleExists(string &title) throw(BLException);
  int getUnitOfMeasurementCount() throw(BLException);
 };
 }
